@@ -5,6 +5,8 @@ import "./App.css";
 import Movie from "./component/Movie/movie";
 import { Routes,Route } from "react-router-dom";
 import Log from "./component/Log/Log";  
+// import Seat from "./component/Seat/Seat";
+import SeatSelection from "./component/Seat/seatSelection";
 
 const App = () => {
           let movieText=[
@@ -55,6 +57,8 @@ const App = () => {
                   />
                   }/>
                   <Route path="/login" element={<Log/>}/>
+                  <Route path="/signup" element={<Log/>}/>
+                  <Route path="/seat" element={<SeatSelection/>}/>
                 </Routes>
 
                 {/* <Movie

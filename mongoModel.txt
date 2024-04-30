@@ -1,0 +1,162 @@
+//user_model.js
+
+import mongoose from'mongoose'
+
+const userSchema=new mongoose.Schema({
+  username:{
+    type:String,
+    required:true
+  },
+  email:{
+    type:String,
+    required:true,
+    unique:true
+  },
+  password:{
+    type:String,
+    required:true
+  },
+  phone:{
+    type:String,
+    required:true,
+    unique:true
+  },
+  address:{
+    type:String
+  }
+},{timestamps:true})
+
+export const User=mongoose.model("User",userSchema)
+
+//movie_model.js
+
+import mongoose, { mongo } from 'mongoose'
+
+const movieSchema=new mongoose.Schema({
+  title:{
+    type:String,
+    required:true
+  },
+  director:{
+    type:String,
+    required:true
+  },
+  genre:{
+    type:String,
+    required:true
+  },
+  releaseDate:{
+    type:Date,
+    required:true
+  },
+  duration:{
+    type:String,
+    required:true
+  },
+  rating:{
+    type:String
+  }
+},{timestamps:true})
+
+export const Movie=mongoose.model("Movie",movieSchema)
+
+//theater_model.js
+
+import mongoose from 'mongoose';
+
+const theaterSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    location: {
+      type: String,
+      required: true,
+    },
+    capacity: {
+      type: Number,
+      required: true,
+    },
+  },
+  { timestamps: true }
+);
+
+export const Theater = mongoose.model('Theater', theaterSchema);
+//screen_model.js
+import mongoose from 'mongoose'
+
+const screenSchema=new mongoose.Schema({
+ 
+  theaterId:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:"Theater"
+  },
+  capacity:{
+    type:Number,
+    required:true
+  }
+
+},{timestamps:true})
+
+export const Screen=mongoose.model("Screen",screenSchema)
+//showtime_model.js
+import mongoose from 'mongoose';
+
+const showtimeSchema = new mongoose.Schema(
+  {
+    movieId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Movie',
+    },
+    theaterId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Theater',
+    },
+    screenId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Screen',
+    },
+    startTime: {
+      type: String,
+    },
+    endTime: {
+      type: Stirng,
+    },
+    price:{
+      type:Number,
+      required:true
+    }
+  },
+  { timestamps: true }
+);
+
+export const ShowTime = mongoose.model('ShowTime', showtimeSchema);
+//ticket_model.js
+import mongoose from 'mongoose'
+
+const ticketSchema=new mongoose.Schema({
+  userId:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:"User"
+  },
+  showtimeId:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:"ShowTime"
+  },
+  seatNumber:{
+    type:String
+  },
+  price:{
+    type:Number,
+    default:0
+  },
+  status:{
+    type:String,
+    required:true
+  }
+},{timestamps:true})
+
+export const Ticket=mongoose.model("Ticket",ticketSchema)
+
+//
