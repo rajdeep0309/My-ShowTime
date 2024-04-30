@@ -10,6 +10,7 @@ const SeatSelection = () => {
   const priceB=120;
   const priceC=150;
   const priceD=200;
+  const priceSeat=[priceA,priceB,priceC,priceD];
   const seatAData = [
     ...Array.from({ length: 17 }, (_, i) => ({
       id:'A'+ i + 1,
@@ -47,7 +48,7 @@ const SeatSelection = () => {
   const [bookedSeats, setBookedSeats] = useState(false);
   const [price, setPrice] = useState(0);
 
-  const handleSeatClick = (seatId,price) => {
+  const handleSeatClick = (seatId,price,priceSeat) => {
     // Toggle seat selection
     if (selectedSeats.includes(seatId)) {
       console.log("sid:",seatId[0]);
@@ -55,17 +56,17 @@ const SeatSelection = () => {
       setSelectedSeats(selectedSeats.filter((seat) => seat !== seatId));
       console.log("before removed",price);
       if(seatId[0]==='A'){
-        setPrice(price=price-100);
+        setPrice(price=price-priceSeat[0]);
 
       }
       else if(seatId[0]==='B'){
-        setPrice(price=price-120);
+        setPrice(price=price-priceSeat[1]);
       }
       else if(seatId[0]==='C'){
-        setPrice(price=price-150);
+        setPrice(price=price-priceSeat[2]);
       }
       else if(seatId[0]==='D'){
-        setPrice(price=price-200);
+        setPrice(price=price-priceSeat[3]);
       }
       // setPrice(price=price-100);
       console.log("Seat removed",price);
@@ -74,17 +75,17 @@ const SeatSelection = () => {
       setSelectedSeats([...selectedSeats, seatId]);
 
       if(seatId[0]==='A'){
-        setPrice(price=price+100);
+        setPrice(price=price+priceSeat[0]);
 
       }
       else if(seatId[0]==='B'){
-        setPrice(price=price+120);
+        setPrice(price=price+priceSeat[1]);
       }
       else if(seatId[0]==='C'){
-        setPrice(price=price+150);
+        setPrice(price=price+priceSeat[2]);
       }
       else if(seatId[0]==='D'){
-        setPrice(price=price+200);
+        setPrice(price=price+priceSeat[3]);
       }
       // setPrice(price=price+100);
       console.log("Seat selected",price);
@@ -105,7 +106,7 @@ const SeatSelection = () => {
                 price={price}
                 booked={bookedSeats}
                 selected={selectedSeats.includes(seat.id)}
-                onClick={() => handleSeatClick(seat.id,price)}
+                onClick={() => handleSeatClick(seat.id,price,priceSeat)}
               />
             ))}
           </div>
@@ -121,7 +122,7 @@ const SeatSelection = () => {
                 seat={seat}
                 price={price}
                 selected={selectedSeats.includes(seat.id)}
-                onClick={() => handleSeatClick(seat.id,price)}
+                onClick={() => handleSeatClick(seat.id,price,priceSeat)}
               />
             ))}
           </div>
@@ -136,7 +137,7 @@ const SeatSelection = () => {
                 seat={seat}
                 price={price}
                 selected={selectedSeats.includes(seat.id)}
-                onClick={() => handleSeatClick(seat.id,price)}
+                onClick={() => handleSeatClick(seat.id,price,priceSeat)}
               />
             ))}
           </div>
@@ -151,7 +152,7 @@ const SeatSelection = () => {
                 seat={seat}
                 price={price}
                 selected={selectedSeats.includes(seat.id)}
-                onClick={() => handleSeatClick(seat.id,price)}
+                onClick={() => handleSeatClick(seat.id,price,priceSeat)}
               />
             ))}
           </div>
